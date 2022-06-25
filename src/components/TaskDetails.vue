@@ -32,6 +32,8 @@ const props = defineProps<{
                 <option value="Todo">Todo</option>
                 <option value="In Progress">In Progress</option>
                 <option value="Completed">Completed</option>
+                <option value="Review">Review</option>
+                <option value="Approved">Approved</option>
             </select> 
         </div>
     </div>

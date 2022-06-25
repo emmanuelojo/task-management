@@ -1,27 +1,36 @@
 <script setup lang="ts">
 import { ref } from 'vue';
+import store from '../store/store';
 
 const sidebarTabs = ref(['Platform Launch', 'Marketing Plan', 'Roadmap' , 'Create New Board'])
+
+const sidebarStatus = ref(store.getters.sidebarStatus)
+
+console.log(sidebarStatus.value, "init sidebar value")
+const toggleSidebar = () => {
+  store.mutations.setSidebar(!sidebarStatus.value)
+console.log(sidebarStatus.value, "sidebar value ")
+}
 </script>
 
 <template>
-    <nav class="bg-n-bg h-screen w-52 border flex flex-col justify-between"> 
+    <nav :class="sidebarStatus  ? 'w-52' : 'w-20'" class="bg-n-bg h-screen border flex flex-col justify-between"> 
         <div>
             <p class="uppercase text-white text-center pt-5 pb-10 font-bold">Logo </p>
         
             <div>
-                <p class="px-4 pb-2 uppercase text-n-grey-text text-xs font-semibold">All Boards (3)</p>
+                <p v-if="sidebarStatus" class="px-4 pb-2 uppercase text-n-grey-text text-xs font-semibold">All Boards (3)</p>
                 <ul class="grid gap-4">
-                    <li v-for="(tab, idx) in sidebarTabs" :key="idx" class="px-4 w-44 flex items-center gap-[10px] font-semibold hover:bg-n-purple hover:text-white hover:rounded-r-3xl cursor-pointer" :class="idx === 0 ? 'bg-n-purple text-white rounded-r-3xl' : idx === sidebarTabs.length -1 ? ' text-n-purple-sec' :  'text-n-grey-text'">
-                        <i :class="idx === sidebarTabs.length -1 ? 'fa fa-plus' : 'fa fa-film'"></i> <p class=" capitalize py-2 text-xs">{{ tab}}</p>
+                    <li v-for="(tab, idx) in sidebarTabs" :key="idx" class="py-2 flex items-center gap-[10px] font-semibold hover:bg-n-purple hover:text-white hover:rounded-r-3xl cursor-pointer" :class="[idx === 0 ? 'bg-n-purple text-white rounded-r-3xl' : idx === sidebarTabs.length -1 ? ' text-n-purple-sec' :  'text-n-grey-text', sidebarStatus ? 'w-44 px-4' : 'justify-center px-7 w-max']">
+                        <i :class="[idx === sidebarTabs.length -1 ? 'fa fa-plus' : 'fa fa-film', sidebarStatus ? 'pl-[10px]' : '']"></i> <p v-if="sidebarStatus" class=" capitalize text-xs">{{ tab}}</p>
                     </li>
                 </ul>
             </div>
         </div>
 
         <div class="grid gap-4 px-4 mb-4">
-            <div class="bg-n-bg-sec text-n-grey-text flex justify-center items-center gap-4 rounded-md py-2">
-                <i class=" fa fa-sun-o"></i>
+            <div  class="bg-n-bg-sec text-n-grey-text flex justify-center items-center gap-4 rounded-md py-2">
+                <i v-if="sidebarStatus" class=" fa fa-sun-o"></i>
 
                  <label class="switch">
                     <input
@@ -32,11 +41,11 @@ const sidebarTabs = ref(['Platform Launch', 'Marketing Plan', 'Roadmap' , 'Creat
                     <span class="slider rounded"></span>
                 </label>
 
-                <i class=" fa fa-moon-o"></i>
+                <i v-if="sidebarStatus" class=" fa fa-moon-o"></i>
             </div>
 
-            <div class="flex items-center gap-2 text-n-grey-text text-xs font-semibold">
-                <i class=" fa fa-eye"></i> <p> Hide Sidebar</p>
+            <div @click="toggleSidebar" :class="!sidebarStatus ? 'justify-center' : ''" class="flex items-center text-n-grey-text text-xs font-semibold cursor-pointer">
+                <i :class="`fa fa-${sidebarStatus ? 'eye-slash' : 'eye'}`"></i> <p v-if="sidebarStatus" class="ml-2"> Hide Sidebar</p>
             </div>
         </div>
     </nav>

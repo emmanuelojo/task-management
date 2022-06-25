@@ -49,21 +49,17 @@ const handleSubmit = () => {
         subTasks.value.map((ele) => ele.completed = true)
     }
 
-     const data = {
-        column: progressStatus.value,
-        columnData: 
-        {
-            title: title.value,
-            desc: desc.value,
-            subTasks: [...subTasks.value]
-        }
+    const data = {
+        status: progressStatus.value,
+        title: title.value,
+        desc: desc.value,
+        subTasks: [...subTasks.value]
     }
 
     
     console.log({data})
 
     store.actions.addTask(data)
-
 
     emit('success')
 
@@ -107,6 +103,8 @@ const handleSubmit = () => {
                 <option value="Todo">Todo</option>
                 <option value="In Progress">In Progress</option>
                 <option value="Completed">Completed</option>
+                <option value="Review">Review</option>
+                <option value="Approved">Approved</option>
             </select> 
         </div>   
         
