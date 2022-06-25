@@ -40,7 +40,14 @@ const list = ref([
           { name: 'Gerard', id: 4 },
         ])
 
-const data = store.getters.tasks
+const dataList = store.getters.tasks
+
+const data = computed({
+    get: () => dataList.value,
+    set: val => {
+        store.mutations.appendColumn(val)
+    }
+})
 
 const selectedTask = ref<Task>()
 
