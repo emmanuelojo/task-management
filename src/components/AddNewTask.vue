@@ -74,7 +74,7 @@ const handleSubmit = () => {
 
 <template>
 <div>
-    <div class="w-60 sm:w-96 grid gap-4">
+    <div class="grid gap-4">
         <div class="grid gap-1">
             <label for="" class="text-white text-sm font-semibold">Title</label>
             <input type="text" v-model="title" placeholder="e.g Take coffee break" class="border-none outline-none rounded-md placeholder:pl-1 placeholder:text-xs text-sm p-1">
@@ -97,7 +97,7 @@ const handleSubmit = () => {
                     <input @keypress.enter="addSubTask" type="text" v-model="newSubTask" placeholder="e.g Make coffee" class="flex flex-grow-1 border-none outline-none rounded-md placeholder:pl-1 placeholder:text-xs text-sm p-1" :class="subTasks.length  ? 'mt-2' : 'mt-0'">
                 </div>
                 <div @click.prevent="addSubTask" class="w-full mt-4 py-2 flex justify-center items-center text-n-purple bg-white hover:text-white hover:bg-n-purple rounded-3xl cursor-pointer">
-                    <p class="e-sm font-semibold">+ Add New Subtask</p>
+                    <p class="text-sm font-semibold">+ Add New Subtask</p>
                 </div>
             </div>
         </div>
@@ -111,7 +111,7 @@ const handleSubmit = () => {
         </div>   
         
         <div @click="handleSubmit" class="w-full py-2 flex justify-center items-center bg-n-purple text-white rounded-3xl hover:scale-105 cursor-pointer">
-            <p class=" font-semibold">Create Task</p>
+            <p class="font-semibold">Create Task</p>
         </div>
     </div>
 </div>

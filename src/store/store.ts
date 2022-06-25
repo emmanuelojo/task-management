@@ -6,6 +6,7 @@ export interface Column{
   columnData: Task[]
 }
 export interface Task{
+  id: number
   status: string
   title: string
   desc?: string
@@ -31,7 +32,8 @@ const state = reactive<State>({
         colour: "#45bede",
         columnData: [
             {
-              status: 'Todo',
+                id: 1,
+                status: 'Todo',
                 title: "Build UI for onboarding flow",
                 desc: "",
                 subTasks: [
@@ -53,7 +55,8 @@ const state = reactive<State>({
                 ]
             },
             {
-              status: 'Todo',
+                id: 2,
+                status: 'Todo',
                 title: "Build UI for search",
                 desc: "",
                 subTasks: [
@@ -70,7 +73,8 @@ const state = reactive<State>({
                 ]
             },
             {
-              status: 'Todo',
+                id: 3,
+                status: 'Todo',
                 title: "Build settings UI",
                 desc: "",
                 subTasks: [
@@ -98,7 +102,8 @@ const state = reactive<State>({
         colour: "#8470f4",
         columnData: [
             {
-               status: 'In Progress',
+                id: 1,
+                status: 'In Progress',
                 title: "Design settings and search pages",
                 desc: "",
                 subTasks: [
@@ -120,7 +125,8 @@ const state = reactive<State>({
                 ]
             },
             {
-               status: 'In Progress',
+                id: 2,
+                status: 'In Progress',
                 title: "Add acount management endpoints",
                 desc: "",
                 subTasks: [
@@ -142,7 +148,8 @@ const state = reactive<State>({
                 ]
             },
             {
-               status: 'In Progress',
+                id: 3,
+                status: 'In Progress',
                 title: "Design onboarding flow",
                 desc: "",
                 subTasks: [
@@ -164,7 +171,8 @@ const state = reactive<State>({
                 ]
             },
             {
-               status: 'In Progress',
+                id: 5,
+                status: 'In Progress',
                 title: "Add search endpoints",
                 desc: "",
                 subTasks: [
@@ -181,7 +189,8 @@ const state = reactive<State>({
                 ]
             },
             {
-               status: 'In Progress',
+                id: 6,
+                status: 'In Progress',
                 title: "Add authentication endpoints",
                 desc: "",
                 subTasks: [
@@ -198,7 +207,8 @@ const state = reactive<State>({
                 ]
             },
             {
-               status: 'In Progress',
+                id: 7,
+                status: 'In Progress',
                 title: "Research pricing points of various competitors and try different business models",
                 desc: "",
                 subTasks: [
@@ -226,7 +236,8 @@ const state = reactive<State>({
         colour: "#6ae1b2",
         columnData: [
             {
-               status: 'Completed',
+                id: 1,
+                status: 'Completed',
                 title: "Conduct 5 wireframe tests",
                 desc: "",
                 subTasks: [
@@ -238,7 +249,8 @@ const state = reactive<State>({
                 ]
             },
             {
-               status: 'Completed',
+                id: 2,
+                status: 'Completed',
                 title: "Create wireframe protype",
                 desc: "",
                 subTasks: [
@@ -250,7 +262,8 @@ const state = reactive<State>({
                 ]
             },
             {
-               status: 'Completed',
+                id: 3,
+                status: 'Completed',
                 title: "Review results of usability tests and iterate",
                 desc: "",
                 subTasks: [
@@ -267,7 +280,8 @@ const state = reactive<State>({
                 ]
             },
             {
-               status: 'Completed',
+                id: 4,
+                status: 'Completed',
                 title: "Create paper prototypes and conduct 10 usability tests with potential customers",
                 desc: "",
                 subTasks: [
@@ -284,7 +298,8 @@ const state = reactive<State>({
                 ]
             },
             {
-               status: 'Completed',
+                id: 5,
+                status: 'Completed',
                 title: "Market discovery",
                 desc: "",
                 subTasks: [
@@ -296,7 +311,8 @@ const state = reactive<State>({
                 ]
             },
             {
-               status: 'Completed',
+                id: 6,
+                status: 'Completed',
                 title: "Competitor analysis",
                 desc: "",
                 subTasks: [
@@ -313,7 +329,8 @@ const state = reactive<State>({
                 ]
             },
             {
-               status: 'Completed',
+                id: 7,
+                status: 'Completed',
                 title: "Research the market",
                 desc: "",
                 subTasks: [
@@ -330,7 +347,17 @@ const state = reactive<State>({
                 ]
             },
         ]
-    }
+    },
+    {
+        column: "Review",
+        colour: "#45bede",
+        columnData: []
+    },
+    {
+        column: "Approved",
+        colour: "#45bede",
+        columnData: []
+    },
 ]
 });
 
