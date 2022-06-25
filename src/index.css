@@ -2,6 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --app-background-color: #FFFFFF;
+  --dynamic-title-color: #363636;
+  --dynamic-subtitle-color: #4a4a4a;
+}
+
+[theme="dark"] {
+  --app-background-color: #21212d;
+  --dynamic-title-color: #FFFFFF;
+  --dynamic-subtitle-color: cyan;
+}
+
 .custom-scrollbar {
 }
 .custom-scrollbar::-webkit-scrollbar {
@@ -27,4 +39,64 @@
 
 .hide-scrollbar::-webkit-scrollbar {
   display: none;
+}
+
+:root {
+  --app-background-color: #FFFFFF;
+}
+
+[theme="dark"] {
+  --app-background-color: #21212d;
+}
+
+[theme="sepia"] {
+  --app-background-color: #F1E7D0;
+}
+
+/*
+* === STYLES ===
+*/
+.app-background {
+background-color: var(--app-background-color);
+}
+
+html, body {
+  height: 100%;
+}
+
+.container {
+  max-width: 1040px;
+}
+
+.app-background {
+  background-color: var(--app-background-color);
+}
+
+.dynamic-title {
+  color: var(--dynamic-title-color);
+}
+
+.dynamic-subtitle {
+  color: var(--dynamic-subtitle-color);
+  padding-top: 10px;
+}
+
+/*
+* === THEME SWITCH ===
+*/
+input.theme-switch {
+  display: none;
+}
+
+input.theme-switch + label {
+  cursor: pointer;
+}
+
+input.theme-switch:not(:checked) + label:hover {
+  cursor: pointer;
+}
+
+input.theme-switch + label:active,
+input.theme-switch:checked + label {
+  cursor: pointer;
 }

@@ -56,10 +56,10 @@ showTaskDetailsModal.value = true
 // }
 
 const createNewColumn = () => {
-    // newColumns.value.push(newColumn.value)
+    newColumns.value.push(newColumn.value)
 
-    // showNewColumnModal.value = false
-    // newColumn.value = ''
+    showNewColumnModal.value = false
+    newColumn.value = ''
 }
 
       
@@ -102,125 +102,123 @@ const createNewColumn = () => {
 </script>
 
 <template>
-    <div class="pb-20 px-4 md:px-8 lg:px-10 bg-n-bg-sec  overflow-x-auto custom-scrollbar">
-        
-
-   <div class="pt-5 flex gap-8">
-        <div class="flex flex-col gap-3 "  @drop="onDrop($event, 'Todo')" @dragover.prevent @dragenter.prevent>
-            <div  class="flex items-center gap-3 text-n-grey-text text-sm font-semibold w-60" >
-                <div class="w-5 h-5 rounded-full bg-[#4b9efe]"></div> {{ 'Todo' + ' (' + todo.length + ")"}}
-            </div>
-            <div  class="grid gap-2 text-n-grey-text text-sm font-semibold w-60">
-                <div @click="showDetails(task)" v-for="(task, index) in todo" :key="index" draggable @dragstart="startDrag($event, task)"  class="mt-2 grid w-60 bg-n-bg rounded-md p-4 cursor-pointer  hover:bg-n-purple ">
-                    <div class="grid gap-1">
-                        <p class=" text-white text-sm font-semibold"> {{ task.title}} </p>
-                        <p class="text-n-grey-text text-xs"> {{ task.subTasks.filter((ele) => ele.completed === true).length  }} of {{ task.subTasks.length }} subtasks</p>
+    <div class="pb-20 px-4 md:px-8 lg:px-10 overflow-x-auto custom-scrollbar">
+        <div class="pt-5 flex gap-8">
+                <div class="flex flex-col gap-3 "  @drop="onDrop($event, 'Todo')" @dragover.prevent @dragenter.prevent>
+                    <div  class="flex items-center gap-3 text-n-grey-text text-sm font-semibold w-60" >
+                        <div class="w-5 h-5 rounded-full bg-[#4b9efe]"></div> {{ 'Todo' + ' (' + todo.length + ")"}}
                     </div>
-                </div>
-            </div>
-            <!-- <VueDraggableNext :list="todo" @change="log">
-                <transition-group>
-                    <div @click="showDetails(task)" v-for="(task, index) in todo" :key="index" draggable @dragstart="startDrag($event, task)" class="mt-4 grid gap-4 w-60 bg-n-bg rounded-md p-4 cursor-pointer  hover:bg-n-purple ">
-                        <div class="grid gap-1">
-                            <p class=" text-white text-sm font-semibold"> {{ task.title}} </p>
-                            <p class="text-n-grey-text text-xs"> {{ task.subTasks.filter((ele) => ele.completed === true).length  }} of {{ task.subTasks.length }} subtasks</p>
+                    <div  class="grid gap-2 text-n-grey-text text-sm font-semibold w-60">
+                        <div @click="showDetails(task)" v-for="(task, index) in todo" :key="index" draggable @dragstart="startDrag($event, task)"  class="mt-2 grid w-60 bg-n-bg rounded-md p-4 cursor-pointer  hover:bg-n-purple ">
+                            <div class="grid gap-1">
+                                <p class=" text-white text-sm font-semibold"> {{ task.title}} </p>
+                                <p class="text-n-grey-text text-xs"> {{ task.subTasks.filter((ele) => ele.completed === true).length  }} of {{ task.subTasks.length }} subtasks</p>
+                            </div>
                         </div>
                     </div>
-                </transition-group>
-            </VueDraggableNext> -->
-        </div>
+                    <!-- <VueDraggableNext :list="todo" @change="log">
+                        <transition-group>
+                            <div @click="showDetails(task)" v-for="(task, index) in todo" :key="index" draggable @dragstart="startDrag($event, task)" class="mt-4 grid gap-4 w-60 bg-n-bg rounded-md p-4 cursor-pointer  hover:bg-n-purple ">
+                                <div class="grid gap-1">
+                                    <p class=" text-white text-sm font-semibold"> {{ task.title}} </p>
+                                    <p class="text-n-grey-text text-xs"> {{ task.subTasks.filter((ele) => ele.completed === true).length  }} of {{ task.subTasks.length }} subtasks</p>
+                                </div>
+                            </div>
+                        </transition-group>
+                    </VueDraggableNext> -->
+                </div>
 
-       <div class="flex flex-col gap-3"  @drop="onDrop($event, 'In Progress')" @dragover.prevent @dragenter.prevent>
-            <div  class="flex items-center gap-3 text-n-grey-text text-sm font-semibold w-60" >
-                <div class="w-5 h-5 rounded-full bg-[#feb334]"></div> {{ 'In Progress' + ' (' + inProgress.length + ")"}}
-            </div>
-
-            
-            <div  class="grid gap-4 text-n-grey-text text-sm font-semibold w-60">
-                <div @click="showDetails(task)" v-for="(task, index) in inProgress" :key="index" draggable @dragstart="startDrag($event, task)"  class="mt-2 grid w-60 bg-n-bg rounded-md p-4 cursor-pointer  hover:bg-n-purple ">
-                    <div class="grid gap-1">
-                        <p class=" text-white text-sm font-semibold"> {{ task.title}} </p>
-                        <p class="text-n-grey-text text-xs"> {{ task.subTasks.filter((ele) => ele.completed === true).length  }} of {{ task.subTasks.length }} subtasks</p>
+            <div class="flex flex-col gap-3"  @drop="onDrop($event, 'In Progress')" @dragover.prevent @dragenter.prevent>
+                    <div  class="flex items-center gap-3 text-n-grey-text text-sm font-semibold w-60" >
+                        <div class="w-5 h-5 rounded-full bg-[#feb334]"></div> {{ 'In Progress' + ' (' + inProgress.length + ")"}}
                     </div>
-                </div>
-            </div>
-        </div>
 
-        <div class="flex flex-col gap-3"  @drop="onDrop($event, 'Completed')" @dragover.prevent @dragenter.prevent>
-            <div  class="flex items-center gap-3 text-n-grey-text text-sm font-semibold w-60" >
-                <div class="w-5 h-5 rounded-full bg-[#6ae1b2]"></div> {{ 'Completed' + ' (' + completed.length + ")"}}
-            </div>
-
-            
-            <div  class="grid gap-4 text-n-grey-text text-sm font-semibold w-60">
-                <div @click="showDetails(task)" v-for="(task, index) in completed" :key="index" draggable @dragstart="startDrag($event, task)"  class="mt-2 grid w-60 bg-n-bg rounded-md p-4 cursor-pointer  hover:bg-n-purple ">
-                    <div class="grid gap-1">
-                        <p class=" text-white text-sm font-semibold"> {{ task.title}} </p>
-                        <p class="text-n-grey-text text-xs"> {{ task.subTasks.filter((ele) => ele.completed === true).length  }} of {{ task.subTasks.length }} subtasks</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="flex flex-col gap-3"  @drop="onDrop($event, 'Review')" @dragover.prevent @dragenter.prevent>
-            <div  class="flex items-center gap-3 text-n-grey-text text-sm font-semibold w-60" >
-                <div class="w-5 h-5 rounded-full bg-[#8573e1]"></div> {{ 'Review' + ' (' + review.length + ")"}}
-            </div>
-
-            
-            <div  class="grid gap-4 text-n-grey-text text-sm font-semibold w-60">
-                <div @click="showDetails(task)" v-for="(task, index) in review" :key="index" draggable @dragstart="startDrag($event, task)"  class="mt-2 grid w-60 bg-n-bg rounded-md p-4 cursor-pointer  hover:bg-n-purple ">
-                    <div class="grid gap-1">
-                        <p class=" text-white text-sm font-semibold"> {{ task.title}} </p>
-                        <p class="text-n-grey-text text-xs"> {{ task.subTasks.filter((ele) => ele.completed === true).length  }} of {{ task.subTasks.length }} subtasks</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-        <div class="flex flex-col gap-3"  @drop="onDrop($event, 'Approved')" @dragover.prevent @dragenter.prevent>
-            <div  class="flex items-center gap-3 text-n-grey-text text-sm font-semibold w-60" >
-                <div class="w-5 h-5 rounded-full bg-[#44d26e]"></div> {{ 'Approved' + ' (' + approved.length + ")"}}
-            </div>
-
-            
-            <div  class="grid gap-4 text-n-grey-text text-sm font-semibold w-60">
-                <div @click="showDetails(task)" v-for="(task, index) in approved" :key="index" draggable @dragstart="startDrag($event, task)"  class="mt-2 grid w-60 bg-n-bg rounded-md p-4 cursor-pointer  hover:bg-n-purple ">
-                    <div class="grid gap-1">
-                        <p class=" text-white text-sm font-semibold"> {{ task.title}} </p>
-                        <p class="text-n-grey-text text-xs"> {{ task.subTasks.filter((ele) => ele.completed === true).length  }} of {{ task.subTasks.length }} subtasks</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div v-if="newColumns.length" class="flex gap-8">
-            <div v-for="(column, idx) in newColumns" :key="idx" class="flex flex-col gap-3"  @drop="onDrop($event, column)" @dragover.prevent @dragenter.prevent>
-                <div  class="flex items-center gap-3 text-n-grey-text text-sm font-semibold w-60" >
-                    <div class="w-5 h-5 rounded-full bg-[#44d26e]"></div> {{ column + ' (' + newColumnData.length + ")"}}
-                </div>
-
-                
-                <div  class="grid gap-4 text-n-grey-text text-sm font-semibold w-60">
-                    <div @click="showDetails(task)" v-for="(task, index) in newColumnData" :key="index" draggable @dragstart="startDrag($event, task)"  class="mt-2 grid w-60 bg-n-bg rounded-md p-4 cursor-pointer  hover:bg-n-purple ">
-                        <div class="grid gap-1">
-                            <p class=" text-white text-sm font-semibold"> {{ task.title}} </p>
-                            <p class="text-n-grey-text text-xs"> {{ task.subTasks.filter((ele) => ele.completed === true).length  }} of {{ task.subTasks.length }} subtasks</p>
+                    
+                    <div  class="grid gap-4 text-n-grey-text text-sm font-semibold w-60">
+                        <div @click="showDetails(task)" v-for="(task, index) in inProgress" :key="index" draggable @dragstart="startDrag($event, task)"  class="mt-2 grid w-60 bg-n-bg rounded-md p-4 cursor-pointer  hover:bg-n-purple ">
+                            <div class="grid gap-1">
+                                <p class=" text-white text-sm font-semibold"> {{ task.title}} </p>
+                                <p class="text-n-grey-text text-xs"> {{ task.subTasks.filter((ele) => ele.completed === true).length  }} of {{ task.subTasks.length }} subtasks</p>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
 
+                <div class="flex flex-col gap-3"  @drop="onDrop($event, 'Completed')" @dragover.prevent @dragenter.prevent>
+                    <div  class="flex items-center gap-3 text-n-grey-text text-sm font-semibold w-60" >
+                        <div class="w-5 h-5 rounded-full bg-[#6ae1b2]"></div> {{ 'Completed' + ' (' + completed.length + ")"}}
+                    </div>
 
-
-          <div class="mt-9">
-                <div @click="showNewColumnModal = true" class="mr-10 w-60 h-[90%] bg-n-bg rounded-md p-4 text-n-grey-text flex justify-center items-center gap-1 cursor-pointer">
-                    <i class="fa fa-plus text-sm"></i> <p class=" text-sm font-semibold">New Column</p>
+                    
+                    <div  class="grid gap-4 text-n-grey-text text-sm font-semibold w-60">
+                        <div @click="showDetails(task)" v-for="(task, index) in completed" :key="index" draggable @dragstart="startDrag($event, task)"  class="mt-2 grid w-60 bg-n-bg rounded-md p-4 cursor-pointer  hover:bg-n-purple ">
+                            <div class="grid gap-1">
+                                <p class=" text-white text-sm font-semibold"> {{ task.title}} </p>
+                                <p class="text-n-grey-text text-xs"> {{ task.subTasks.filter((ele) => ele.completed === true).length  }} of {{ task.subTasks.length }} subtasks</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-         </div>  
+
+                <div class="flex flex-col gap-3"  @drop="onDrop($event, 'Review')" @dragover.prevent @dragenter.prevent>
+                    <div  class="flex items-center gap-3 text-n-grey-text text-sm font-semibold w-60" >
+                        <div class="w-5 h-5 rounded-full bg-[#8573e1]"></div> {{ 'Review' + ' (' + review.length + ")"}}
+                    </div>
+
+                    
+                    <div  class="grid gap-4 text-n-grey-text text-sm font-semibold w-60">
+                        <div @click="showDetails(task)" v-for="(task, index) in review" :key="index" draggable @dragstart="startDrag($event, task)"  class="mt-2 grid w-60 bg-n-bg rounded-md p-4 cursor-pointer  hover:bg-n-purple ">
+                            <div class="grid gap-1">
+                                <p class=" text-white text-sm font-semibold"> {{ task.title}} </p>
+                                <p class="text-n-grey-text text-xs"> {{ task.subTasks.filter((ele) => ele.completed === true).length  }} of {{ task.subTasks.length }} subtasks</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="flex flex-col gap-3"  @drop="onDrop($event, 'Approved')" @dragover.prevent @dragenter.prevent>
+                    <div  class="flex items-center gap-3 text-n-grey-text text-sm font-semibold w-60" >
+                        <div class="w-5 h-5 rounded-full bg-[#44d26e]"></div> {{ 'Approved' + ' (' + approved.length + ")"}}
+                    </div>
+
+                    
+                    <div  class="grid gap-4 text-n-grey-text text-sm font-semibold w-60">
+                        <div @click="showDetails(task)" v-for="(task, index) in approved" :key="index" draggable @dragstart="startDrag($event, task)"  class="mt-2 grid w-60 bg-n-bg rounded-md p-4 cursor-pointer  hover:bg-n-purple ">
+                            <div class="grid gap-1">
+                                <p class=" text-white text-sm font-semibold"> {{ task.title}} </p>
+                                <p class="text-n-grey-text text-xs"> {{ task.subTasks.filter((ele) => ele.completed === true).length  }} of {{ task.subTasks.length }} subtasks</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div v-if="newColumns.length" class="flex gap-8">
+                    <div v-for="(column, idx) in newColumns" :key="idx" class="flex flex-col gap-3"  @drop="onDrop($event, column)" @dragover.prevent @dragenter.prevent>
+                        <div  class="flex items-center gap-3 text-n-grey-text text-sm font-semibold w-60" >
+                            <div class="w-5 h-5 rounded-full bg-white"></div> {{ column + ' (' + newColumnData.length + ")"}}
+                        </div>
+
+                        
+                        <div  class="grid gap-4 text-n-grey-text text-sm font-semibold w-60">
+                            <div @click="showDetails(task)" v-for="(task, index) in newColumnData" :key="index" draggable @dragstart="startDrag($event, task)"  class="mt-2 grid w-60 bg-n-bg rounded-md p-4 cursor-pointer  hover:bg-n-purple ">
+                                <div class="grid gap-1">
+                                    <p class=" text-white text-sm font-semibold"> {{ task.title}} </p>
+                                    <p class="text-n-grey-text text-xs"> {{ task.subTasks.filter((ele) => ele.completed === true).length  }} of {{ task.subTasks.length }} subtasks</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="mt-9">
+                        <div @click="showNewColumnModal = true" class="mr-10 w-60 h-[90%] bg-n-bg rounded-md p-4 text-n-grey-text flex justify-center items-center gap-1 cursor-pointer">
+                            <i class="fa fa-plus text-sm"></i> <p class=" text-sm font-semibold">New Column</p>
+                        </div>
+                    </div>
+        </div>  
     </div>
 
     <Modal title="Create New Column" v-if="showNewColumnModal" @close-modal="showNewColumnModal = false">
@@ -235,19 +233,6 @@ const createNewColumn = () => {
             </div>
         </form>
     </Modal>
-
-    <!-- <Modal title="Create New Column" v-if="showNewColumnModal" @close-modal="showNewColumnModal = false">
-        <form @submit.prevent="createNewColumn" class="grid gap-4">
-            <div class="grid gap-1">
-                <label for=""  class=" text-white text-sm">Column Name</label>
-                <input type="text" placeholder="Name of column" autofocus class="h-10 bg-transparent text-white border border-n-grey-text rounded-md pl-1 placeholder:pl-1 placeholder:text-sm" v-model="newColumn">
-            </div>
-
-            <div class="bg-n-bg rounded-xl py-2 px-5 flex justify-center items-center">
-                <input type="submit" value="Submit" class="text-white cursor-pointer" ref="inputRef">
-            </div>
-        </form>
-    </Modal> -->
 
     <Modal v-if="showTaskDetailsModal && selectedTask" title="Task Details" @close-modal="showTaskDetailsModal = false">
         <TaskDetails :task="selectedTask" @success="showTaskDetailsModal = false"/>

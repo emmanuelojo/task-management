@@ -1,22 +1,53 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, onMounted, watch } from 'vue';
 import store from '../store/store';
+
+onMounted(() => {
+  let bodyElement = document.body
+  bodyElement.classList.add('app-background')
+
+  let htmlElement = document.documentElement;
+  let theme = localStorage.getItem("theme");
+
+  if(theme === 'dark') {
+      htmlElement.setAttribute('theme', 'dark')
+      darkMode.value = true
+    } else {
+      htmlElement.setAttribute('theme', 'light');
+      darkMode.value = false
+  }
+})
+
+const darkMode = ref(false)
+
+const emit = defineEmits(['dark-mode'])
+
+watch(darkMode, () => {
+  let htmlElement = document.documentElement;
+
+  if(darkMode.value){
+    localStorage.setItem("theme", 'dark');
+    htmlElement.setAttribute('theme', 'dark');
+  }else{
+    localStorage.setItem("theme", 'light');
+    htmlElement.setAttribute('theme', 'light');
+  }
+})
 
 const sidebarTabs = ref(['Platform Launch', 'Marketing Plan', 'Roadmap' , 'Create New Board'])
 
 const sidebarStatus = ref(store.getters.sidebarStatus)
 
-console.log(sidebarStatus.value, "init sidebar value")
 const toggleSidebar = () => {
   store.mutations.setSidebar(!sidebarStatus.value)
-console.log(sidebarStatus.value, "sidebar value ")
 }
+
 </script>
 
 <template>
-    <nav :class="sidebarStatus  ? 'w-52' : 'w-20'" class="bg-n-bg h-screen border flex flex-col justify-between"> 
+    <nav :class="[sidebarStatus  ? 'w-52' : 'w-20', darkMode ? 'bg-n-bg': '']" class="h-screen border flex flex-col justify-between"> 
         <div>
-            <p class="uppercase text-white text-center pt-5 pb-10 font-bold">Logo </p>
+            <p class="uppercase text-center pt-5 pb-10 font-bold" :class="darkMode ? 'text-white' : 'text-n-darker-blue'">Logo </p>
         
             <div>
                 <p v-if="sidebarStatus" class="px-4 pb-2 uppercase text-n-grey-text text-xs font-semibold">All Boards (3)</p>
@@ -36,6 +67,7 @@ console.log(sidebarStatus.value, "sidebar value ")
                     <input
                     type="checkbox"
                     class="w-0 h-0"
+                    v-model="darkMode" @change="$emit('dark-mode')"
                     />
 
                     <span class="slider rounded"></span>
