@@ -3,13 +3,13 @@ import {  onMounted, ref } from "vue";
 import Sidebar from "../components/Sidebar.vue";
 import Navbar from '../components/Navbar.vue'
 import Home from "../views/Home.vue";
-import sidebarStore from '../store/sidebarStore'
+import store from '../store/store'
 
 onMounted(async () => {
-  sidebarStore.actions.getSidebarStatus();
+  store.actions.getSidebarStatus();
 });
 const visibleLeft = ref(false);
-const showSidebar = ref(sidebarStore.getters.sidebarStatus);
+const showSidebar = ref(store.getters.sidebarStatus);
 
 const closeSideBar = () => {
     visibleLeft.value = false;
@@ -22,7 +22,7 @@ const closeSideBar = () => {
       <Sidebar :showSidebar="true" />
     </div>
 
-    <div class="h-screen overflow-y-auto">
+    <div class="h-screen overflow-y-auto custom-scrollbar">
       <router-view v-slot="{ Component, route }">
         <div class="sticky top-0">
           <Navbar />

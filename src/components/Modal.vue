@@ -53,7 +53,7 @@ export default defineComponent({
       style="z-index: 888"
     >
       <div
-        class="modal-content w-md flex-shrink-0 rounded-md overflow-hidden bg-n-bg-sec"
+        class="modal-content w-[90%] sm:w-96 flex-shrink-0 rounded-md overflow-hidden bg-n-bg-sec"
       >
         <div
           class="flex items-center px-6 mt-6"
