@@ -18,7 +18,7 @@ const closeSideBar = () => {
 
 <template>
   <div class="grid grid-cols-auto-1fr">
-    <div :class="`${showSidebar ? 'block' : 'hidden'} md:block`">
+    <div class="hidden md:block`">
       <Sidebar :showSidebar="true" />
     </div>
 
