@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted, Ref, computed } from 'vue';
+import { ref, onMounted, Ref, computed, watch } from 'vue';
 import Modal from '../components/Modal.vue';
 import store, { Column, Task } from '../store/store'
 import TaskDetails from '../components/TaskDetails.vue'
@@ -33,6 +33,14 @@ const newColumns = ref<string[]>([])
 const dataList = store.getters.tasks
 
 const selectedTask = ref<Task>()
+
+const darkMode = ref(true)
+
+  const theme = ref(store.getters.darkTheme)
+  
+  watch(theme, (newVal, oldVal) => {
+    newVal === true ? darkMode.value = true : darkMode.value = false    
+  })
 
 const showDetails = (payload: Task ) => {
 selectedTask.value = payload
@@ -218,7 +226,12 @@ const createNewColumn = () => {
                             <i class="fa fa-plus text-sm"></i> <p class=" text-sm font-semibold">New Column</p>
                         </div>
                     </div>
-        </div>  
+        </div> 
+        
+        <div class="mt-60 mb-4 flex justify-center items-center text-xs attribution" :class="darkMode ? 'text-white': 'text-n-bg'">
+            Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank" class="ml-1"> Frontend Mentor</a>. 
+            Coded by <a href="https://jekon-dev.netlify.app/" class="ml-1">Jekon</a>.
+        </div>
     </div>
 
     <Modal title="Create New Column" v-if="showNewColumnModal" @close-modal="showNewColumnModal = false">
