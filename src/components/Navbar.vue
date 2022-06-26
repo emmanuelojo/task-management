@@ -2,6 +2,7 @@
 import { ref, watch, onBeforeMount } from 'vue';
 import Modal from './Modal.vue';
 import AddNewTask from './AddNewTask.vue';
+import store from '../store/store';
 
 onBeforeMount(() => {
   window.addEventListener("scroll", handleScroll);
@@ -13,14 +14,16 @@ const showCreateTaskModal = ref(false)
 
 const darkMode = ref(true)
 
-  const theme = ref(localStorage.getItem('theme'))
+  const theme = ref(store.getters.darkTheme)
   
   console.log(theme.value, "init theme LS")
   console.log(typeof theme.value, "type of theme LS")
 
   watch(theme, () => {
-    theme.value === 'dark' ? darkMode.value = true : darkMode.value = false
+    console.log(theme.value, "theme status")
+    theme.value === true ? darkMode.value = true : darkMode.value = false
   })
+
 const handleScroll = () => {
   if (window.pageYOffset > 0) {
     if (topOfPage.value) topOfPage.value = false;
@@ -31,9 +34,7 @@ const handleScroll = () => {
 </script>
 
 <template>
-    <!-- <nav class="w-full z-20 bg-transparent fixed p-4 flex justify-between items-center border" :class="{ onScroll: !topOfPage }"> -->
-   
-    <nav class="p-4 flex justify-between items-center border" :class="[{ onScroll: !topOfPage }, darkMode ? 'bg-n-bg' : 'bg-white' ]">
+    <nav class="p-4 flex justify-between items-center border" :class="[{ onScroll: !topOfPage } ]">
        <div> <p class="font-bold text-xl text-n-purple" >Platform Launch</p> </div>
 
         <div class="flex items-center gap-4">

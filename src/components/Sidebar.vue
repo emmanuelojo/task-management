@@ -12,9 +12,11 @@ onMounted(() => {
   if(theme === 'dark') {
       htmlElement.setAttribute('theme', 'dark')
       darkMode.value = true
+      store.mutations.setTheme(true)
     } else {
       htmlElement.setAttribute('theme', 'light');
       darkMode.value = false
+      store.mutations.setTheme(false)
   }
 })
 

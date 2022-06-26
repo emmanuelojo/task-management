@@ -21,11 +21,13 @@ export interface subTask {
 
 interface State {
   showSidebar: boolean;
+  darkTheme:boolean;
   tasks: Task[]
 }
 
 const state = reactive<State>({
   showSidebar: true,
+  darkTheme: true,
   tasks: [
     
             {
@@ -351,6 +353,9 @@ const mutations = {
   setSidebar(payload: boolean) {
     state.showSidebar = !state.showSidebar;
   },
+  setTheme(payload: boolean){
+    state.darkTheme = !state.darkTheme
+  },
   appendTask(payload: any){},
 
 //   appendColumn(payload: any){
@@ -379,7 +384,8 @@ const actions = {
 
 const getters = {
   sidebarStatus: computed(() => state.showSidebar),
-  tasks: computed(() => state.tasks)
+  darkTheme: computed(() => state.darkTheme),
+  tasks: computed(() => state.tasks),
 };
 
 export default {
