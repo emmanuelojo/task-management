@@ -7,8 +7,8 @@ import TaskDetails from '../components/TaskDetails.vue'
   import { VueDraggableNext } from 'vue-draggable-next'
 
 onMounted(() => {
-    // if(inputRef.value)
-    //  inputRef.value.focus()
+    if(inputRef.value)
+     inputRef.value.focus()
 })
 
 const inputRef = ref() as Ref<HTMLInputElement>
@@ -225,11 +225,11 @@ const createNewColumn = () => {
         <form @submit.prevent="createNewColumn" class="grid gap-4">
             <div class="grid gap-1">
                 <label for=""  class=" text-white text-sm">Column Name</label>
-                <input type="text" placeholder="Name of column" autofocus class="h-10 bg-transparent text-white border border-n-grey-text rounded-md pl-1 placeholder:pl-1 placeholder:text-sm" v-model="newColumn">
+                <input type="text" placeholder="Name of column" autofocus class="h-10 bg-transparent text-white border border-n-grey-text rounded-md pl-1 placeholder:pl-1 placeholder:text-sm" ref="inputRef" v-model="newColumn">
             </div>
 
             <div class="bg-n-bg rounded-xl py-2 px-5 flex justify-center items-center">
-                <input type="submit" value="Submit" class="text-white cursor-pointer" ref="inputRef">
+                <input type="submit" value="Submit" class="text-white cursor-pointer">
             </div>
         </form>
     </Modal>

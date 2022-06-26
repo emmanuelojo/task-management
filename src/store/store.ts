@@ -336,16 +336,6 @@ const state = reactive<State>({
                 ]
             },
      
-    // {
-    //     column: "Review",
-    //     colour: "#45bede",
-    //     columnData: []
-    // },
-    // {
-    //     column: "Approved",
-    //     colour: "#45bede",
-    //     columnData: []
-    // },
 ]
 });
 
@@ -354,7 +344,7 @@ const mutations = {
     state.showSidebar = !state.showSidebar;
   },
   setTheme(payload: boolean){
-    state.darkTheme = !state.darkTheme
+    state.darkTheme = payload
   },
   appendTask(payload: any){},
 

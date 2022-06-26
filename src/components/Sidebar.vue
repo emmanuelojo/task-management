@@ -12,11 +12,9 @@ onMounted(() => {
   if(theme === 'dark') {
       htmlElement.setAttribute('theme', 'dark')
       darkMode.value = true
-      store.mutations.setTheme(true)
     } else {
       htmlElement.setAttribute('theme', 'light');
       darkMode.value = false
-      store.mutations.setTheme(false)
   }
 })
 
@@ -30,9 +28,11 @@ watch(darkMode, () => {
   if(darkMode.value){
     localStorage.setItem("theme", 'dark');
     htmlElement.setAttribute('theme', 'dark');
+    store.mutations.setTheme(true)
   }else{
     localStorage.setItem("theme", 'light');
     htmlElement.setAttribute('theme', 'light');
+    store.mutations.setTheme(false)
   }
 })
 

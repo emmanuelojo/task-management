@@ -15,17 +15,12 @@ const closeSideBar = () => {
     visibleLeft.value = false;
 };
 
-const darkMode = ref(true)
-
-const changeBg = () => {
-  darkMode.value = !darkMode.value
-}
 </script>
 
 <template>
   <div class="grid grid-cols-auto-1fr">
     <div class="hidden md:block">
-      <Sidebar :showSidebar="true" @dark-mode="changeBg"/>
+      <Sidebar :showSidebar="true" />
     </div>
 
     <div class="h-screen overflow-y-auto custom-scrollbar">

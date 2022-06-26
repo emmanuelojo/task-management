@@ -57,7 +57,7 @@ const handleSubmit = () => {
     }
 
     
-    console.log({data})
+    // console.log({data})
 
     store.actions.addTask(data)
 

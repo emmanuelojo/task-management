@@ -16,12 +16,8 @@ const darkMode = ref(true)
 
   const theme = ref(store.getters.darkTheme)
   
-  console.log(theme.value, "init theme LS")
-  console.log(typeof theme.value, "type of theme LS")
-
-  watch(theme, () => {
-    console.log(theme.value, "theme status")
-    theme.value === true ? darkMode.value = true : darkMode.value = false
+  watch(theme, (newVal, oldVal) => {
+    newVal === true ? darkMode.value = true : darkMode.value = false    
   })
 
 const handleScroll = () => {
@@ -34,7 +30,7 @@ const handleScroll = () => {
 </script>
 
 <template>
-    <nav class="p-4 flex justify-between items-center border" :class="[{ onScroll: !topOfPage } ]">
+    <nav class="p-4 flex justify-between items-center border" :class="[{ onScroll: !topOfPage }, darkMode ? 'bg-n-bg' : 'bg-white' ]">
        <div> <p class="font-bold text-xl text-n-purple" >Platform Launch</p> </div>
 
         <div class="flex items-center gap-4">
