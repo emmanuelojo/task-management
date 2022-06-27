@@ -7,6 +7,10 @@ onMounted(() => {
   bodyElement.classList.add('app-background')
 
   let htmlElement = document.documentElement;
+  localStorage.setItem("theme", 'dark');
+  htmlElement.setAttribute('theme', 'dark');
+  store.mutations.setTheme(true)
+  
   let theme = localStorage.getItem("theme");
 
   if(theme === 'dark') {
@@ -47,7 +51,7 @@ const toggleSidebar = () => {
 </script>
 
 <template>
-    <nav :class="[sidebarStatus  ? 'w-52' : 'w-20', darkMode ? 'bg-n-bg': '']" class="h-screen border flex flex-col justify-between"> 
+    <nav :class="[sidebarStatus  ? 'w-52' : 'w-20', darkMode ? 'bg-n-bg': 'bg-white']" class="h-screen border flex flex-col justify-between"> 
         <div>
             <p class="uppercase text-center pt-5 pb-10 font-bold" :class="darkMode ? 'text-white' : 'text-n-darker-blue'">Logo </p>
         

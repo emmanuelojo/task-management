@@ -117,9 +117,9 @@ const createNewColumn = () => {
                         <div class="w-5 h-5 rounded-full bg-[#4b9efe]"></div> {{ 'Todo' + ' (' + todo.length + ")"}}
                     </div>
                     <div  class="grid gap-2 text-n-grey-text text-sm font-semibold w-60">
-                        <div @click="showDetails(task)" v-for="(task, index) in todo" :key="index" draggable @dragstart="startDrag($event, task)"  class="mt-2 grid w-60 bg-n-bg rounded-md p-4 cursor-pointer  hover:bg-n-purple ">
+                        <div @click="showDetails(task)" v-for="(task, index) in todo" :key="index" draggable @dragstart="startDrag($event, task)"  class="mt-2 grid w-60 hover:bg-n-purple rounded-md p-4 cursor-pointer  " :class="darkMode ? 'bg-n-bg' : 'bg-white'">
                             <div class="grid gap-1">
-                                <p class=" text-white text-sm font-semibold"> {{ task.title}} </p>
+                                <p class="text-sm font-semibold" :class="darkMode ? 'text-white' : 'text-n-dark-blue'"> {{ task.title}} </p>
                                 <p class="text-n-grey-text text-xs"> {{ task.subTasks.filter((ele) => ele.completed === true).length  }} of {{ task.subTasks.length }} subtasks</p>
                             </div>
                         </div>
@@ -128,7 +128,7 @@ const createNewColumn = () => {
                         <transition-group>
                             <div @click="showDetails(task)" v-for="(task, index) in todo" :key="index" draggable @dragstart="startDrag($event, task)" class="mt-4 grid gap-4 w-60 bg-n-bg rounded-md p-4 cursor-pointer  hover:bg-n-purple ">
                                 <div class="grid gap-1">
-                                    <p class=" text-white text-sm font-semibold"> {{ task.title}} </p>
+                                    <p class="text-white text-sm font-semibold" :class="darkMode ? 'text-white' : 'text-n-dark-blue'"> {{ task.title}} </p>
                                     <p class="text-n-grey-text text-xs"> {{ task.subTasks.filter((ele) => ele.completed === true).length  }} of {{ task.subTasks.length }} subtasks</p>
                                 </div>
                             </div>
@@ -136,16 +136,16 @@ const createNewColumn = () => {
                     </VueDraggableNext> -->
                 </div>
 
-            <div class="flex flex-col gap-3"  @drop="onDrop($event, 'In Progress')" @dragover.prevent @dragenter.prevent>
+                <div class="flex flex-col gap-3"  @drop="onDrop($event, 'In Progress')" @dragover.prevent @dragenter.prevent>
                     <div  class="flex items-center gap-3 text-n-grey-text text-sm font-semibold w-60" >
                         <div class="w-5 h-5 rounded-full bg-[#feb334]"></div> {{ 'In Progress' + ' (' + inProgress.length + ")"}}
                     </div>
 
                     
                     <div  class="grid gap-4 text-n-grey-text text-sm font-semibold w-60">
-                        <div @click="showDetails(task)" v-for="(task, index) in inProgress" :key="index" draggable @dragstart="startDrag($event, task)"  class="mt-2 grid w-60 bg-n-bg rounded-md p-4 cursor-pointer  hover:bg-n-purple ">
+                        <div @click="showDetails(task)" v-for="(task, index) in inProgress" :key="index" draggable @dragstart="startDrag($event, task)"  class="mt-2 grid w-60 hover:bg-n-purple rounded-md p-4 cursor-pointer  " :class="darkMode ? 'bg-n-bg' : 'bg-white'">
                             <div class="grid gap-1">
-                                <p class=" text-white text-sm font-semibold"> {{ task.title}} </p>
+                                <p class="text-white text-sm font-semibold" :class="darkMode ? 'text-white' : 'text-n-dark-blue'"> {{ task.title}} </p>
                                 <p class="text-n-grey-text text-xs"> {{ task.subTasks.filter((ele) => ele.completed === true).length  }} of {{ task.subTasks.length }} subtasks</p>
                             </div>
                         </div>
@@ -159,9 +159,9 @@ const createNewColumn = () => {
 
                     
                     <div  class="grid gap-4 text-n-grey-text text-sm font-semibold w-60">
-                        <div @click="showDetails(task)" v-for="(task, index) in completed" :key="index" draggable @dragstart="startDrag($event, task)"  class="mt-2 grid w-60 bg-n-bg rounded-md p-4 cursor-pointer  hover:bg-n-purple ">
+                        <div @click="showDetails(task)" v-for="(task, index) in completed" :key="index" draggable @dragstart="startDrag($event, task)"  class="mt-2 grid w-60 hover:bg-n-purple rounded-md p-4 cursor-pointer  " :class="darkMode ? 'bg-n-bg' : 'bg-white'">
                             <div class="grid gap-1">
-                                <p class=" text-white text-sm font-semibold"> {{ task.title}} </p>
+                                <p class="text-white text-sm font-semibold" :class="darkMode ? 'text-white' : 'text-n-dark-blue'"> {{ task.title}} </p>
                                 <p class="text-n-grey-text text-xs"> {{ task.subTasks.filter((ele) => ele.completed === true).length  }} of {{ task.subTasks.length }} subtasks</p>
                             </div>
                         </div>
@@ -175,9 +175,9 @@ const createNewColumn = () => {
 
                     
                     <div  class="grid gap-4 text-n-grey-text text-sm font-semibold w-60">
-                        <div @click="showDetails(task)" v-for="(task, index) in review" :key="index" draggable @dragstart="startDrag($event, task)"  class="mt-2 grid w-60 bg-n-bg rounded-md p-4 cursor-pointer  hover:bg-n-purple ">
+                        <div @click="showDetails(task)" v-for="(task, index) in review" :key="index" draggable @dragstart="startDrag($event, task)"  class="mt-2 grid w-60 hover:bg-n-purple rounded-md p-4 cursor-pointer  " :class="darkMode ? 'bg-n-bg' : 'bg-white'">
                             <div class="grid gap-1">
-                                <p class=" text-white text-sm font-semibold"> {{ task.title}} </p>
+                                <p class="text-white text-sm font-semibold" :class="darkMode ? 'text-white' : 'text-n-dark-blue'"> {{ task.title}} </p>
                                 <p class="text-n-grey-text text-xs"> {{ task.subTasks.filter((ele) => ele.completed === true).length  }} of {{ task.subTasks.length }} subtasks</p>
                             </div>
                         </div>
@@ -192,9 +192,9 @@ const createNewColumn = () => {
 
                     
                     <div  class="grid gap-4 text-n-grey-text text-sm font-semibold w-60">
-                        <div @click="showDetails(task)" v-for="(task, index) in approved" :key="index" draggable @dragstart="startDrag($event, task)"  class="mt-2 grid w-60 bg-n-bg rounded-md p-4 cursor-pointer  hover:bg-n-purple ">
+                        <div @click="showDetails(task)" v-for="(task, index) in approved" :key="index" draggable @dragstart="startDrag($event, task)"  class="mt-2 grid w-60 hover:bg-n-purple rounded-md p-4 cursor-pointer  " :class="darkMode ? 'bg-n-bg' : 'bg-white'">
                             <div class="grid gap-1">
-                                <p class=" text-white text-sm font-semibold"> {{ task.title}} </p>
+                                <p class="text-white text-sm font-semibold" :class="darkMode ? 'text-white' : 'text-n-dark-blue'"> {{ task.title}} </p>
                                 <p class="text-n-grey-text text-xs"> {{ task.subTasks.filter((ele) => ele.completed === true).length  }} of {{ task.subTasks.length }} subtasks</p>
                             </div>
                         </div>
@@ -209,9 +209,9 @@ const createNewColumn = () => {
 
                         
                         <div  class="grid gap-4 text-n-grey-text text-sm font-semibold w-60">
-                            <div @click="showDetails(task)" v-for="(task, index) in newColumnData" :key="index" draggable @dragstart="startDrag($event, task)"  class="mt-2 grid w-60 bg-n-bg rounded-md p-4 cursor-pointer  hover:bg-n-purple ">
+                            <div @click="showDetails(task)" v-for="(task, index) in newColumnData" :key="index" draggable @dragstart="startDrag($event, task)"  class="mt-2 grid w-60 hover:bg-n-purple rounded-md p-4 cursor-pointer  " :class="darkMode ? 'bg-n-bg' : 'bg-white'">
                                 <div class="grid gap-1">
-                                    <p class=" text-white text-sm font-semibold"> {{ task.title}} </p>
+                                    <p class="text-white text-sm font-semibold" :class="darkMode ? 'text-white' : 'text-n-dark-blue'"> {{ task.title}} </p>
                                     <p class="text-n-grey-text text-xs"> {{ task.subTasks.filter((ele) => ele.completed === true).length  }} of {{ task.subTasks.length }} subtasks</p>
                                 </div>
                             </div>
@@ -222,7 +222,7 @@ const createNewColumn = () => {
 
 
                 <div class="mt-9">
-                        <div @click="showNewColumnModal = true" class="mr-10 w-60 h-[90%] bg-n-bg rounded-md p-4 text-n-grey-text flex justify-center items-center gap-1 cursor-pointer">
+                        <div @click="showNewColumnModal = true" class="mr-10 w-60 h-[90%] rounded-md p-4 text-n-grey-text flex justify-center items-center gap-1 cursor-pointer" :class="darkMode ? 'bg-n-bg' : 'bg-n-silver-sec'">
                             <i class="fa fa-plus text-sm"></i> <p class=" text-sm font-semibold">New Column</p>
                         </div>
                     </div>

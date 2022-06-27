@@ -26,7 +26,9 @@ module.exports = {
         "n-green":"#6ae1b2",
         "n-green-sec":"#45bede",
         "n-purple":"#8470f4",
-        "n-purple-sec": "#4d478c"
+        "n-purple-sec": "#4d478c",
+        "n-silver": '#f4f7fe',
+        "n-silver-sec": "#e9f0fa"
       },
       gridTemplateColumns: {
         "auto-1fr": "auto 1fr",
