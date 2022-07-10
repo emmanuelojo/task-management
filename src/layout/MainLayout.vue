@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import {  onMounted, ref } from "vue";
+import { onMounted, ref } from "vue";
 import Sidebar from "../components/Sidebar.vue";
-import Navbar from '../components/Navbar.vue'
+import Navbar from "../components/Navbar.vue";
 import Home from "../views/Home.vue";
-import store from '../store/store'
+import store from "../store/store";
 
 onMounted(async () => {
   store.actions.getSidebarStatus();
@@ -12,9 +12,8 @@ const visibleLeft = ref(false);
 const showSidebar = ref(store.getters.sidebarStatus);
 
 const closeSideBar = () => {
-    visibleLeft.value = false;
+  visibleLeft.value = false;
 };
-
 </script>
 
 <template>
@@ -35,9 +34,7 @@ const closeSideBar = () => {
         </transition>
       </router-view>
     </div>
-
   </div>
 </template>
 
-<style scoped>
-</style>
+<style scoped></style>

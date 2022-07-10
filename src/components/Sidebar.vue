@@ -1,92 +1,138 @@
 <script setup lang="ts">
-import { ref, onMounted, watch } from 'vue';
-import store from '../store/store';
+import { ref, onMounted, watch } from "vue";
+import store from "../store/store";
 
 onMounted(() => {
-  let bodyElement = document.body
-  bodyElement.classList.add('app-background')
+  let bodyElement = document.body;
+  bodyElement.classList.add("app-background");
 
   let htmlElement = document.documentElement;
-  localStorage.setItem("theme", 'dark');
-  htmlElement.setAttribute('theme', 'dark');
-  store.mutations.setTheme(true)
-  
+  localStorage.setItem("theme", "dark");
+  htmlElement.setAttribute("theme", "dark");
+  store.mutations.setTheme(true);
+
   let theme = localStorage.getItem("theme");
 
-  if(theme === 'dark') {
-      htmlElement.setAttribute('theme', 'dark')
-      darkMode.value = true
-    } else {
-      htmlElement.setAttribute('theme', 'light');
-      darkMode.value = false
+  if (theme === "dark") {
+    htmlElement.setAttribute("theme", "dark");
+    darkMode.value = true;
+  } else {
+    htmlElement.setAttribute("theme", "light");
+    darkMode.value = false;
   }
-})
+});
 
-const darkMode = ref(false)
+const darkMode = ref(false);
 
-const emit = defineEmits(['dark-mode'])
+const emit = defineEmits(["dark-mode"]);
 
 watch(darkMode, () => {
   let htmlElement = document.documentElement;
 
-  if(darkMode.value){
-    localStorage.setItem("theme", 'dark');
-    htmlElement.setAttribute('theme', 'dark');
-    store.mutations.setTheme(true)
-  }else{
-    localStorage.setItem("theme", 'light');
-    htmlElement.setAttribute('theme', 'light');
-    store.mutations.setTheme(false)
+  if (darkMode.value) {
+    localStorage.setItem("theme", "dark");
+    htmlElement.setAttribute("theme", "dark");
+    store.mutations.setTheme(true);
+  } else {
+    localStorage.setItem("theme", "light");
+    htmlElement.setAttribute("theme", "light");
+    store.mutations.setTheme(false);
   }
-})
+});
 
-const sidebarTabs = ref(['Platform Launch', 'Marketing Plan', 'Roadmap' , 'Create New Board'])
+const sidebarTabs = ref([
+  "Platform Launch",
+  "Marketing Plan",
+  "Roadmap",
+  "Create New Board",
+]);
 
-const sidebarStatus = ref(store.getters.sidebarStatus)
+const sidebarStatus = ref(store.getters.sidebarStatus);
 
 const toggleSidebar = () => {
-  store.mutations.setSidebar(!sidebarStatus.value)
-}
-
+  store.mutations.setSidebar(!sidebarStatus.value);
+};
 </script>
 
 <template>
-    <nav :class="[sidebarStatus  ? 'w-52' : 'w-20', darkMode ? 'bg-n-bg': 'bg-white']" class="h-screen border flex flex-col justify-between"> 
-        <div>
-            <p class="uppercase text-center pt-5 pb-10 font-bold" :class="darkMode ? 'text-white' : 'text-n-darker-blue'">Logo </p>
-        
-            <div>
-                <p v-if="sidebarStatus" class="px-4 pb-2 uppercase text-n-grey-text text-xs font-semibold">All Boards (3)</p>
-                <ul class="grid gap-4">
-                    <li v-for="(tab, idx) in sidebarTabs" :key="idx" class="py-2 flex items-center gap-[10px] font-semibold hover:bg-n-purple hover:text-white hover:rounded-r-3xl cursor-pointer" :class="[idx === 0 ? 'bg-n-purple text-white rounded-r-3xl' : idx === sidebarTabs.length -1 ? ' text-n-purple-sec' :  'text-n-grey-text', sidebarStatus ? 'w-44 px-4' : 'justify-center px-7 w-max']">
-                        <i :class="[idx === sidebarTabs.length -1 ? 'fa fa-plus' : 'fa fa-film', sidebarStatus ? 'pl-[10px]' : '']"></i> <p v-if="sidebarStatus" class=" capitalize text-xs">{{ tab}}</p>
-                    </li>
-                </ul>
-            </div>
-        </div>
+  <nav
+    :class="[
+      sidebarStatus ? 'w-52' : 'w-20',
+      darkMode ? 'bg-n-bg' : 'bg-white',
+    ]"
+    class="h-screen border flex flex-col justify-between"
+  >
+    <div>
+      <p
+        class="uppercase text-center pt-5 pb-10 font-bold"
+        :class="darkMode ? 'text-white' : 'text-n-darker-blue'"
+      >
+        Logo
+      </p>
 
-        <div class="grid gap-4 px-4 mb-4">
-            <div  class="bg-n-bg-sec text-n-grey-text flex justify-center items-center gap-4 rounded-md py-2">
-                <i v-if="sidebarStatus" class=" fa fa-sun-o"></i>
+      <div>
+        <p
+          v-if="sidebarStatus"
+          class="px-4 pb-2 uppercase text-n-grey-text text-xs font-semibold"
+        >
+          All Boards (3)
+        </p>
+        <ul class="grid gap-4">
+          <li
+            v-for="(tab, idx) in sidebarTabs"
+            :key="idx"
+            class="py-2 flex items-center gap-[10px] font-semibold hover:bg-n-purple hover:text-white hover:rounded-r-3xl cursor-pointer"
+            :class="[
+              idx === 0
+                ? 'bg-n-purple text-white rounded-r-3xl'
+                : idx === sidebarTabs.length - 1
+                ? ' text-n-purple-sec'
+                : 'text-n-grey-text',
+              sidebarStatus ? 'w-44 px-4' : 'justify-center px-7 w-max',
+            ]"
+          >
+            <i
+              :class="[
+                idx === sidebarTabs.length - 1 ? 'fa fa-plus' : 'fa fa-film',
+                sidebarStatus ? 'pl-[10px]' : '',
+              ]"
+            ></i>
+            <p v-if="sidebarStatus" class="capitalize text-xs">{{ tab }}</p>
+          </li>
+        </ul>
+      </div>
+    </div>
 
-                 <label class="switch">
-                    <input
-                    type="checkbox"
-                    class="w-0 h-0"
-                    v-model="darkMode" @change="$emit('dark-mode')"
-                    />
+    <div class="grid gap-4 px-4 mb-4">
+      <div
+        class="bg-n-bg-sec text-n-grey-text flex justify-center items-center gap-4 rounded-md py-2"
+      >
+        <i v-if="sidebarStatus" class="fa fa-sun-o"></i>
 
-                    <span class="slider rounded"></span>
-                </label>
+        <label class="switch">
+          <input
+            type="checkbox"
+            class="w-0 h-0"
+            v-model="darkMode"
+            @change="$emit('dark-mode')"
+          />
 
-                <i v-if="sidebarStatus" class=" fa fa-moon-o"></i>
-            </div>
+          <span class="slider rounded"></span>
+        </label>
 
-            <div @click="toggleSidebar" :class="!sidebarStatus ? 'justify-center' : ''" class="flex items-center text-n-grey-text text-xs font-semibold cursor-pointer">
-                <i :class="`fa fa-${sidebarStatus ? 'eye-slash' : 'eye'}`"></i> <p v-if="sidebarStatus" class="ml-2"> Hide Sidebar</p>
-            </div>
-        </div>
-    </nav>
+        <i v-if="sidebarStatus" class="fa fa-moon-o"></i>
+      </div>
+
+      <div
+        @click="toggleSidebar"
+        :class="!sidebarStatus ? 'justify-center' : ''"
+        class="flex items-center text-n-grey-text text-xs font-semibold cursor-pointer"
+      >
+        <i :class="`fa fa-${sidebarStatus ? 'eye-slash' : 'eye'}`"></i>
+        <p v-if="sidebarStatus" class="ml-2">Hide Sidebar</p>
+      </div>
+    </div>
+  </nav>
 </template>
 
 <style>
@@ -94,52 +140,53 @@ const toggleSidebar = () => {
   position: relative;
   display: inline-block;
   width: 40px;
-  height: 20px;}
+  height: 20px;
+}
 
- .switch input {
-    opacity: 0;
-    width: 0;
-    height: 0;
-  }
- .switch input:checked + .slider {
-    background-color: #6868f7;
-  }
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.switch input:checked + .slider {
+  background-color: #6868f7;
+}
 
- .switch input:focus + .slider {
-    box-shadow: 0 0 1px #6868f7;
-  }
+.switch input:focus + .slider {
+  box-shadow: 0 0 1px #6868f7;
+}
 
- .switch input:checked + .slider:before {
-    -webkit-transform: translateX(20px);
-    -ms-transform: translateX(20px);
-    transform: translateX(20px);
-  }
- .switch .slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #ccc;
-    border-radius: 20px;
-    -webkit-transition: 0.4s;
-    transition: 0.4s;
- }
+.switch input:checked + .slider:before {
+  -webkit-transform: translateX(20px);
+  -ms-transform: translateX(20px);
+  transform: translateX(20px);
+}
+.switch .slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  border-radius: 20px;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
 
-   .switch .slider:before {
-      position: absolute;
-      content: '';
-      height: 15px;
-      width: 15px;
-      left: 2px;
-      bottom: 4px;
-      top: 3px;
-      border-radius: 50%;
-      background-color: white;
-      -webkit-transition: 0.4s;
-      transition: 0.4s;
-    }
+.switch .slider:before {
+  position: absolute;
+  content: "";
+  height: 15px;
+  width: 15px;
+  left: 2px;
+  bottom: 4px;
+  top: 3px;
+  border-radius: 50%;
+  background-color: white;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
 
 .c-switch {
   position: relative;
@@ -150,32 +197,31 @@ const toggleSidebar = () => {
   overflow: hidden;
   border: 2px solid;
   cursor: pointer;
-  }
+}
 
-  .c-switch span {
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    transition: 2s ease-in-out;
-  }
+.c-switch span {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  transition: 2s ease-in-out;
+}
 
-    .c-switch span::after {
-      content: '';
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      /* left: 4px; */
-      right: 0;
-      width: 12px;
-      height: 12px;
-      border-radius: 50%; 
-      animation-duration: 300ms;
-      border: 2px solid #d9d9d9;
-    }
-
+.c-switch span::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  /* left: 4px; */
+  right: 0;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  animation-duration: 300ms;
+  border: 2px solid #d9d9d9;
+}
 
 input:checked + span {
   background: #8470f4;
@@ -187,5 +233,4 @@ input:checked + span::after {
   transform: translateX(-100%) translateY(-50%);
   animation: toggleSize 300ms ease;
 }
-
 </style>

@@ -1,16 +1,27 @@
 <script lang="ts">
-import { defineComponent, onMounted, onUnmounted, PropType } from 'vue'
+import { defineComponent, onMounted, onUnmounted, PropType } from "vue";
 export default defineComponent({
   props: {
     size: {
       type: String as PropType<
-        'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl' | '6xl' | '7xl' | '8xl' | 'full'
+        | "sm"
+        | "md"
+        | "lg"
+        | "xl"
+        | "2xl"
+        | "3xl"
+        | "4xl"
+        | "5xl"
+        | "6xl"
+        | "7xl"
+        | "8xl"
+        | "full"
       >,
-      default: 'md',
+      default: "md",
     },
     title: {
       type: String,
-      default: '',
+      default: "",
     },
     defaultPadding: {
       type: Boolean,
@@ -22,32 +33,31 @@ export default defineComponent({
     },
     defaultBackgroundColour: {
       type: String,
-      default: '#21212d',
+      default: "#21212d",
     },
   },
 
-
-    setup(_, { emit }) {
+  setup(_, { emit }) {
     onMounted(() => {
-      document.body.style.maxHeight = '100vh'
-      document.body.style.overflow = 'hidden'
-    })
+      document.body.style.maxHeight = "100vh";
+      document.body.style.overflow = "hidden";
+    });
     onUnmounted(() => {
-      document.body.style.overflow = 'auto'
-    })
+      document.body.style.overflow = "auto";
+    });
     const closeModal = () => {
-      emit('closeModal')
-    }
+      emit("closeModal");
+    };
     return {
       closeModal,
-    }
+    };
   },
-  emits: ['closeModal'],
-})
+  emits: ["closeModal"],
+});
 </script>
 
 <template>
-    <teleport to="#modal">
+  <teleport to="#modal">
     <div
       class="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50 px-4"
       style="z-index: 888"
@@ -59,10 +69,7 @@ export default defineComponent({
           class="flex items-center px-6 mt-6"
           :class="[title ? 'justify-between' : 'justify-end']"
         >
-          <h1
-            v-if="title"
-            class="text-white text-base font-medium"
-          >
+          <h1 v-if="title" class="text-white text-base font-medium">
             {{ title }}
           </h1>
           <button @click="closeModal">
@@ -88,6 +95,6 @@ export default defineComponent({
   flex-direction: column;
 }
 .modal-content__body {
-    overflow: auto;
+  overflow: auto;
 }
 </style>
