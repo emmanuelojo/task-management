@@ -45,7 +45,7 @@ const columns = ref(store.getters.columns)
       </div>
     </div>
 
-    <div class="grid gap-1">
+    <!-- <div class="grid gap-1">
       <label for="" class="text-white text-sm font-semibold">Status</label>
       <select
         v-model="task.status"
@@ -53,6 +53,6 @@ const columns = ref(store.getters.columns)
       >
           <option v-for="(column, idx) in columns" :key="idx" :value="column"> {{ column }}</option>
       </select>
-    </div>
+    </div> -->
   </div>
 </template>
