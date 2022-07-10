@@ -33,7 +33,7 @@ const state = reactive<State>({
   tasks: [
     {
       id: 1,
-      status: "Review",
+      status: "Todo",
       title: "Build UI for onboarding flow",
       desc: "",
       subTasks: [
@@ -57,7 +57,7 @@ const state = reactive<State>({
     },
     {
       id: 2,
-      status: "Approved",
+      status: "Todo",
       title: "Build UI for search",
       desc: "",
       subTasks: [
