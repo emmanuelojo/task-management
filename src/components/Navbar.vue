@@ -37,8 +37,11 @@ const handleScroll = () => {
     <div><p class="font-bold text-xl text-n-purple">Platform Launch</p></div>
 
     <div class="flex items-center gap-4">
-      <div
+      <!-- <div
         @click="showCreateTaskModal = true"
+        class="flex items-center gap-2 bg-n-blue rounded-full sm:rounded-2xl px-3 sm:px-5 py-2 text-white cursor-pointer hover:scale-105"
+      > -->
+      <div
         class="flex items-center gap-2 bg-n-blue rounded-full sm:rounded-2xl px-3 sm:px-5 py-2 text-white cursor-pointer hover:scale-105"
       >
         <i class="fa fa-plus text-sm"></i>
