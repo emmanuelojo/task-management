@@ -384,6 +384,17 @@ const mutations = {
     mutations.setReloadStatus(true);
   },
 
+  appendTask(payload: any) {
+    state.tasks = state.tasks.filter((task) => {
+      if (task.id === payload.id) {
+        return { ...payload };
+      } else {
+        return task;
+      }
+    });
+    mutations.setReloadStatus(true);
+  },
+
   //   appendColumn(payload: any){
   //     state.tasks.find((ele) => {
   //       if(ele.column === payload.column){

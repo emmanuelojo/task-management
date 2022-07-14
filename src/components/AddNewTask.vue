@@ -140,11 +140,6 @@ const handleSubmit = () => {
           v-model="progressStatus"
           class="border-none outline-none text-sm py-2 px-1 rounded-md"
         >
-          <!-- <option value="Todo">Todo</option>
-          <option value="In Progress">In Progress</option>
-          <option value="Completed">Completed</option>
-          <option value="Review">Review</option>
-          <option value="Approved">Approved</option> -->
           <option v-for="(column, idx) in columns" :key="idx" :value="column">
             {{ column }}
           </option>

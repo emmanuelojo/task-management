@@ -109,6 +109,10 @@ const createNewColumn = () => {
   newColumn.value = "";
 };
 
+const reLoadData = () => {
+  showTaskDetailsModal.value = false;
+};
+
 const blocked = ref<Task[]>([]);
 
 const todo = ref<Task[]>([]);
@@ -631,7 +635,7 @@ const onDrop = (evt: any, status: string) => {
     title="Task Details"
     @close-modal="showTaskDetailsModal = false"
   >
-    <TaskDetails :task="selectedTask" @success="showTaskDetailsModal = false" />
+    <TaskDetails :task="selectedTask" @success="reLoadData" />
   </Modal>
 
   <Toast v-if="showToast" />
