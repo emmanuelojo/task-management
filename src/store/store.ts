@@ -11,7 +11,7 @@ export interface Task {
   title: string;
   desc?: string;
   subTasks: subTask[];
-  hovered: boolean
+  hovered: boolean;
 }
 
 export interface subTask {
@@ -25,6 +25,7 @@ interface State {
   darkTheme: boolean;
   tasks: Task[];
   availableColumns: string[];
+  reLoad: boolean;
 }
 
 const state = reactive<State>({
@@ -53,7 +54,7 @@ const state = reactive<State>({
           subTask: "Connect to strong WiFi",
         },
       ],
-      hovered: false
+      hovered: false,
     },
     {
       id: 2,
@@ -72,7 +73,7 @@ const state = reactive<State>({
           subTask: "Implement logic",
         },
       ],
-      hovered: false
+      hovered: false,
     },
     {
       id: 3,
@@ -96,7 +97,7 @@ const state = reactive<State>({
           subTask: "Connect to strong WiFi",
         },
       ],
-      hovered: false
+      hovered: false,
     },
 
     {
@@ -121,7 +122,7 @@ const state = reactive<State>({
           subTask: "Connect to strong WiFi",
         },
       ],
-      hovered: false
+      hovered: false,
     },
     {
       id: 5,
@@ -145,7 +146,7 @@ const state = reactive<State>({
           subTask: "Implement logic",
         },
       ],
-      hovered: false
+      hovered: false,
     },
     {
       id: 6,
@@ -169,7 +170,7 @@ const state = reactive<State>({
           subTask: "Connect to strong WiFi",
         },
       ],
-      hovered: false
+      hovered: false,
     },
     {
       id: 7,
@@ -188,7 +189,7 @@ const state = reactive<State>({
           subTask: "Install dependencies",
         },
       ],
-      hovered: false
+      hovered: false,
     },
     {
       id: 8,
@@ -207,7 +208,7 @@ const state = reactive<State>({
           subTask: "Install dependencies",
         },
       ],
-      hovered: false
+      hovered: false,
     },
     {
       id: 9,
@@ -232,7 +233,7 @@ const state = reactive<State>({
           subTask: "Connect to strong WiFi",
         },
       ],
-      hovered: false
+      hovered: false,
     },
 
     {
@@ -247,7 +248,7 @@ const state = reactive<State>({
           subTask: "Scaffolding",
         },
       ],
-      hovered: false
+      hovered: false,
     },
     {
       id: 11,
@@ -261,7 +262,7 @@ const state = reactive<State>({
           subTask: "Scaffolding",
         },
       ],
-      hovered: false
+      hovered: false,
     },
     {
       id: 12,
@@ -280,7 +281,7 @@ const state = reactive<State>({
           subTask: "Implement logic",
         },
       ],
-      hovered: false
+      hovered: false,
     },
     {
       id: 13,
@@ -300,7 +301,7 @@ const state = reactive<State>({
           subTask: "Scaffolding",
         },
       ],
-      hovered: false
+      hovered: false,
     },
     {
       id: 14,
@@ -314,7 +315,7 @@ const state = reactive<State>({
           subTask: "Scaffolding",
         },
       ],
-      hovered: false
+      hovered: false,
     },
     {
       id: 15,
@@ -333,7 +334,7 @@ const state = reactive<State>({
           subTask: "Install dependencies",
         },
       ],
-      hovered: false
+      hovered: false,
     },
     {
       id: 16,
@@ -352,7 +353,7 @@ const state = reactive<State>({
           subTask: "Connect to strong WiFi",
         },
       ],
-      hovered: false
+      hovered: false,
     },
   ],
   availableColumns: [
@@ -363,6 +364,7 @@ const state = reactive<State>({
     "Review",
     "Approved",
   ],
+  reLoad: false,
 });
 
 const mutations = {
@@ -372,7 +374,15 @@ const mutations = {
   setTheme(payload: boolean) {
     state.darkTheme = payload;
   },
-  appendTask(payload: any) {},
+  setReloadStatus(payload: boolean) {
+    state.reLoad = !state.reLoad;
+  },
+
+  appendTasks(payload: any) {
+    let appendedData = { id: state.tasks.length + 1, ...payload };
+    state.tasks.push(appendedData);
+    mutations.setReloadStatus(true);
+  },
 
   //   appendColumn(payload: any){
   //     state.tasks.find((ele) => {
@@ -398,7 +408,8 @@ const actions = {
 
   addTask(data: any) {
     let appendedData = { id: state.tasks.length + 1, ...data };
-    mutations.appendColumn(appendedData);
+    // mutations.appendColumn(appendedData);
+    mutations.appendTasks(appendedData);
   },
 };
 
@@ -406,7 +417,8 @@ const getters = {
   sidebarStatus: computed(() => state.showSidebar),
   darkTheme: computed(() => state.darkTheme),
   tasks: computed(() => state.tasks),
-  columns: computed(() => state.availableColumns)
+  columns: computed(() => state.availableColumns),
+  reloadStatus: computed(() => state.reLoad),
 };
 
 export default {

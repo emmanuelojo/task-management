@@ -20,7 +20,9 @@ const newSubTask = ref("");
 
 const progressStatus = ref("Todo");
 
-const columns = ref(store.getters.columns)
+const columns = ref(store.getters.columns);
+
+const numberOfTasks = ref(store.getters.tasks.value.length);
 
 const emit = defineEmits<{
   (e: "success"): void;
@@ -50,15 +52,15 @@ const handleSubmit = () => {
   }
 
   const data = {
+    // id: numberOfTasks.value + 1,
     status: progressStatus.value,
     title: title.value,
     desc: desc.value,
     subTasks: [...subTasks.value],
+    hovered: false,
   };
 
-  // console.log({data})
-
-  store.actions.addTask(data);
+  store.mutations.appendTasks(data);
 
   emit("success");
 
@@ -143,7 +145,9 @@ const handleSubmit = () => {
           <option value="Completed">Completed</option>
           <option value="Review">Review</option>
           <option value="Approved">Approved</option> -->
-          <option v-for="(column, idx) in columns" :key="idx" :value="column"> {{ column }}</option>
+          <option v-for="(column, idx) in columns" :key="idx" :value="column">
+            {{ column }}
+          </option>
         </select>
       </div>
 

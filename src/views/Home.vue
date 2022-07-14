@@ -38,7 +38,7 @@ const columns = ref([
 
 const newColumns = ref<string[]>([]);
 
-const dataList = store.getters.tasks;
+const dataList = ref(store.getters.tasks);
 
 const selectedTask = ref<Task>();
 
@@ -46,8 +46,26 @@ const darkMode = ref(true);
 
 const theme = ref(store.getters.darkTheme);
 
+const reloadStatus = ref(store.getters.reloadStatus);
+
 watch(theme, (newVal, oldVal) => {
   newVal === true ? (darkMode.value = true) : (darkMode.value = false);
+});
+
+watch(reloadStatus, (newVal, oldVal) => {
+  if (newVal !== oldVal) reloadStatus.value;
+  if (reloadStatus.value === true) {
+    store.getters.tasks.value;
+    blocked.value = [...blockedList.value];
+    todo.value = [...todoList.value];
+    inProgress.value = [...inProgressList.value];
+    completed.value = [...completedList.value];
+    review.value = [...reviewList.value];
+    approved.value = [...approvedList.value];
+    newColumnData.value = [...newColumnDataList.value];
+
+    store.mutations.setReloadStatus(false);
+  }
 });
 
 const showDetails = (payload: Task) => {

@@ -34,14 +34,13 @@ const handleScroll = () => {
     class="p-4 flex justify-between items-center border"
     :class="[{ onScroll: !topOfPage }, darkMode ? 'bg-n-bg' : 'bg-white']"
   >
-    <div><p class="font-bold text-xl text-n-purple">Platform Launch</p></div>
+    <div>
+      <p class="font-bold text-xl text-n-purple">Platform Launch</p>
+    </div>
 
     <div class="flex items-center gap-4">
-      <!-- <div
-        @click="showCreateTaskModal = true"
-        class="flex items-center gap-2 bg-n-blue rounded-full sm:rounded-2xl px-3 sm:px-5 py-2 text-white cursor-pointer hover:scale-105"
-      > -->
       <div
+        @click="showCreateTaskModal = true"
         class="flex items-center gap-2 bg-n-blue rounded-full sm:rounded-2xl px-3 sm:px-5 py-2 text-white cursor-pointer hover:scale-105"
       >
         <i class="fa fa-plus text-sm"></i>

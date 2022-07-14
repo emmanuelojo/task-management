@@ -6,7 +6,7 @@ const props = defineProps<{
   task: Task;
 }>();
 
-const columns = ref(store.getters.columns)
+const columns = ref(store.getters.columns);
 </script>
 
 <template>
