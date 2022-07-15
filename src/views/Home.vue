@@ -616,7 +616,7 @@ const onDrop = (evt: any, status: string) => {
           type="text"
           placeholder="Name of column"
           autofocus
-          class="h-10 bg-transparent text-white border border-n-grey-text rounded-md pl-1 placeholder:pl-1 placeholder:text-sm"
+          class="h-10 bg-transparent text-white border border-n-grey-text outline-none rounded-md pl-1 placeholder:pl-1 placeholder:text-sm"
           ref="inputRef"
           v-model="newColumn"
         />
